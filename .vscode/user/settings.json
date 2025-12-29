@@ -1,0 +1,43 @@
+{
+    "editor.rulers": [
+        80
+    ],
+    "editor.minimap.enabled": false,
+    "terminal.integrated.inheritEnv": false,
+    "explorer.confirmDelete": false,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "python.analysis.typeCheckingMode": "off",
+    "files.associations": {
+        "*.py": "python",
+        "*.sql": "postgres"
+    },
+    "github.copilot.selectedCompletionModel": "",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": false
+    },
+    "[html]": {
+        "editor.tabSize": 4
+    },
+    "editor.fontFamily": "'JetBrainsMono NF', Menlo, Monaco, 'Courier New', monospace",
+    "git.openRepositoryInParentFolders": "never",
+    "sqltools.results.location": "none",
+    "sqltools.autoConnectTo": "",
+    "[sql]": {},
+    "terminal.integrated.suggest.enabled": false,
+    "[postgres]": {},
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.activityBar.location": "top",
+    "sqltools.highlightQuery": false,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+        "before": ["<C-o>"],
+        "after": ["m", "z", "o", "<Esc>", "`", "z"]
+        }
+    ],
+    "vim.useSystemClipboard": true
+}

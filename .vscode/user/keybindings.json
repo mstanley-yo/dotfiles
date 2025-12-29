@@ -1,0 +1,82 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Make Python run on Shift+Cmd+Enter
+    {
+        "key": "shift+cmd+enter",
+        "command": "-editor.action.insertLineBefore",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "-notebook.cell.insertCodeCellAbove",
+        "when": "notebookCellListFocused && !inputFocus"
+    },
+    {
+        "key": "shift+cmd+enter",
+        "command": "python.execInTerminal-icon",
+        "when": "editorLangId == python"
+    },
+    // Make SQL queries run in the terminal on Shift+Cmd+Enter
+    {
+        "key": "shift+cmd+enter",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run Current SQL File",
+        "when": "editorLangId == sql"
+    },
+    // Make Ctrl+Tab and Ctrl+Shift+Tab always switch tabs regardless of focus
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "!editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "!editorTextFocus"
+    },
+    // Toggle between terminal and editor focus
+    {
+    "key":     "ctrl+`",
+    "command": "workbench.action.terminal.focus"
+    },
+    {
+    "key":     "ctrl+`",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when":    "terminalFocus"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+        "when": "inQuickOpen && inViewsPicker"
+    },
+    {
+        "key": "ctrl+shift+q",
+        "command": "-workbench.action.quickOpenNavigatePreviousInViewPicker",
+        "when": "inQuickOpen && inViewsPicker"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quickOpenView"
+    },
+    // Make tabs work in read-only mode (i.e. normal mode of Vim)
+    {
+        "key": "tab",
+        "command": "tab",
+        "when": "editorTextFocus && !editorTabMovesFocus"
+    },
+    {
+        "key": "shift+tab",
+        "command": "outdent",
+        "when": "editorTextFocus && !editorTabMovesFocus"
+    }
+]
