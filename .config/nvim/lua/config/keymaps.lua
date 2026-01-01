@@ -15,3 +15,6 @@ vim.keymap.set("n", "s", "s", { noremap = true })
 
 -- Kill to end of line (Emacs-style) (But I think I still want digraphs?)
 -- vim.keymap.set("i", "<C-k>", "<C-o>D", { desc = "Kill to end of line" })
+
+-- Set <C-c> to <Esc> in normal mode so you don't get the warning message to exit nvim
+vim.keymap.set("n", "<C-c>", "<Esc>", { noremap = true, silent = true })
