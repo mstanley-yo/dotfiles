@@ -46,13 +46,13 @@
     },
     // Toggle between terminal and editor focus
     {
-    "key":     "ctrl+`",
-    "command": "workbench.action.terminal.focus"
+        "key":     "ctrl+`",
+        "command": "workbench.action.terminal.focus"
     },
     {
-    "key":     "ctrl+`",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when":    "terminalFocus"
+        "key":     "ctrl+`",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when":    "terminalFocus"
     },
     {
         "key": "ctrl+q",
@@ -68,15 +68,15 @@
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenView"
     },
-    // Make tabs work in read-only mode (i.e. normal mode of Vim)
+    // Make Tab indent ONLY outside of insert mode (Vim normal/visual)
     {
         "key": "tab",
-        "command": "tab",
-        "when": "editorTextFocus && !editorTabMovesFocus"
+        "command": "editor.action.indentLines",
+        "when": "editorTextFocus && vim.mode != 'Insert' && !editorTabMovesFocus"
     },
     {
         "key": "shift+tab",
-        "command": "outdent",
-        "when": "editorTextFocus && !editorTabMovesFocus"
+        "command": "editor.action.outdentLines",
+        "when": "editorTextFocus && vim.mode != 'Insert' && !editorTabMovesFocus"
     }
 ]
