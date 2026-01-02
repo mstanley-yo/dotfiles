@@ -9,9 +9,14 @@
 
 -- Custom digraphs
 vim.cmd("digraph ok 9989") -- ✅
+vim.cmd("digraph no 10060") -- ❌
 
 -- Function to open a new line below while keeping cursor on current line
-vim.keymap.set("n", "<C-o>", "mzo<Esc>`z", { noremap = true, silent = true })
+vim.keymap.set("n", "go", "o<Esc>k", { noremap = true })
+vim.keymap.set("n", "gO", "O<Esc>j", { noremap = true })
 
 -- Use system clipboard by default
 vim.opt.clipboard = "unnamedplus"
+
+-- Bind BS to destructive d (while supporting motions)
+vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })

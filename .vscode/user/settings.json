@@ -35,9 +35,25 @@
     "sqltools.highlightQuery": false,
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-        "before": ["<C-o>"],
-        "after": ["m", "z", "o", "<Esc>", "`", "z"]
+            "before": ["g", "o"],
+            "after": ["o", "<Esc>", "k"]
+        },
+        {
+            "before": ["g", "O"],
+            "after": ["O", "<Esc>", "j"]
+        },
+        {
+            "before": ["<BS>"],
+            "after": ["\"", "_", "d"]
         }
     ],
-    "vim.useSystemClipboard": true
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<BS>"],
+            "after": ["\"", "_", "d"]
+        }
+    ]
+    "vim.useSystemClipboard": true,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.vimrc"
 }
