@@ -27,3 +27,6 @@ vim.keymap.set("n", "<leader>r", function()
   local file = vim.fn.expand("%")
   vim.api.nvim_feedkeys(":!python3 " .. file .. "\n", "n", false)
 end, { desc = "Run current file with Python" })
+
+-- Ruler for python
+vim.opt.colorcolumn = "80,100"
