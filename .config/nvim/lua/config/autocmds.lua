@@ -20,3 +20,10 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Bind BS to destructive d (while supporting motions)
 vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })
+
+-- Run current file with Python (auto-save first)
+vim.keymap.set("n", "<leader>r", function()
+  vim.cmd("write")
+  local file = vim.fn.expand("%")
+  vim.api.nvim_feedkeys(":!python3 " .. file .. "\n", "n", false)
+end, { desc = "Run current file with Python" })
