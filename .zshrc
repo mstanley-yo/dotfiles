@@ -86,7 +86,6 @@ export PCOV="$SV/20240409_GDpCoV519/_writeup"
 
 # personal scripts
 alias bgt="Rscript '$YY/Budget/viz_budget.R'"
-alias ocr="python3 /Users/stanleyyo/Scripts/ocr.py"
 alias obs="python3 '$YY/obsidian.py'"
 alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 
@@ -95,7 +94,6 @@ alias pip="pip3"
 alias py="python3"
 alias rr="Rscript"
 alias nv="nvim"
-alias code="open -a 'Visual Studio Code'"
 
 # use git to track dotfiles (including .zshrc)
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -158,3 +156,6 @@ if ! command -v starship >/dev/null 2>&1; then
 fi
 eval "$(starship init zsh)"
 
+# Configure path
+export PATH="$PATH:/Users/stanleyyo/Scripts"
+export PATH="$PATH:/Users/stanleyyo/.local/bin" # add pipx to PATH
