@@ -93,7 +93,8 @@ alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 alias pip="pip3"
 alias py="python3"
 alias rr="Rscript"
-alias nv="nvim"
+alias nvim='nvim --listen /tmp/nvim'
+alias v='nvim --server /tmp/nvim --remote' # open in nvim
 
 # use git to track dotfiles (including .zshrc)
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
