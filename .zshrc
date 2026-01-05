@@ -42,17 +42,7 @@ zinit light Aloxaf/fzf-tab
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':fzf-tab:*' fzf-flags --ansi
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:*' fzf-preview '
-if [ -d "$realpath" ]; then
-  ls --color "$realpath"
-elif file --mime-type -b "$realpath" | grep -q "^image/"; then
-  chafa --size=80x40 "$realpath"
-elif file -b "$realpath" | grep -q text; then
-  bat --style=numbers --color=always --line-range=:300 "$realpath"
-else
-  file "$realpath"
-fi'
+zstyle ':fzf-tab:*' fzf-preview ""
 
 # Use pf to preview files and copy the absolute path to them upon selection
 typeset -ga FZF_PREVIEW_OPTS=(
