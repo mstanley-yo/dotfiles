@@ -83,8 +83,32 @@ alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 alias pip="pip3"
 alias py="python3"
 alias rr="Rscript"
-alias nvim='nvim --listen /tmp/nvim'
-alias v='nvim --server /tmp/nvim --remote' # open in nvim
+
+# configure nvim
+nvim() {
+    local socket="/tmp/nvim-$(tmux display-message -p "#{session_name}" 2>/dev/null || echo "default")"
+    rm -f "$socket" 2>/dev/null
+    command nvim --listen "$socket" "$@"
+}
+v() {
+    local socket="/tmp/nvim-$(tmux display-message -p "#{session_name}")"
+    if [ -S "$socket" ]; then
+        # Convert all arguments to absolute paths
+        local args=()
+        for arg in "$@"; do
+            if [ -f "$arg" ] || [ -d "$arg" ]; then
+                args+=("$(realpath "$arg")")
+            else
+                args+=("$arg")
+            fi
+        done
+        command nvim --server "$socket" --remote "${args[@]}"
+    else
+        echo "Error: No nvim server running in this tmux session. Start nvim first."
+        return 1
+    fi
+}
+export EDITOR=nvim
 
 # use git to track dotfiles (including .zshrc)
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -136,9 +160,6 @@ EOF
 if [[ -f ~/.zshrc.private ]]; then
   source ~/.zshrc.private
 fi
-
-# make neovim the default editor
-export EDITOR=nvim
 
 # configure starship
 if ! command -v starship >/dev/null 2>&1; then
