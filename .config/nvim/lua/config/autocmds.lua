@@ -1,22 +1,10 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
-
 -- Custom digraphs
 vim.cmd("digraph ok 9989") -- ✅
 vim.cmd("digraph no 10060") -- ❌
 
--- Function to open a new line below while keeping cursor on current line
+-- Bindings to open a new line below while keeping cursor on current line
 vim.keymap.set("n", "go", "o<Esc>k", { noremap = true })
 vim.keymap.set("n", "gO", "O<Esc>j", { noremap = true })
-
--- Use system clipboard by default
-vim.opt.clipboard = "unnamedplus"
 
 -- Bind BS to destructive d (while supporting motions)
 vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })
@@ -38,3 +26,16 @@ end, { desc = "Run current file with Python (venv)" })
 
 -- Ruler for python
 vim.opt.colorcolumn = "80,100"
+
+-- Bindings for obsidian
+vim.keymap.set("n", "<leader>o", function()
+  vim.cmd("edit " .. os.date(os.getenv("YY") .. "/Journal/%Y-%m-%d.md"))
+end, { desc = "Open daily note" })
+vim.keymap.set("n", "<leader>O", function()
+  -- ensure we're in a markdown buffer
+  if vim.bo.filetype ~= "markdown" then
+    vim.cmd("enew")
+    vim.bo.filetype = "markdown"
+  end
+  vim.cmd("Obsidian")
+end, { desc = "Open Obsidian command" })
