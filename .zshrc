@@ -96,9 +96,17 @@ v() {
         # Convert all arguments to absolute paths
         local args=()
         for arg in "$@"; do
-            if [ -f "$arg" ] || [ -d "$arg" ]; then
-                args+=("$(realpath "$arg")")
+            # Check if argument looks like a file path (not a vim command like +10)
+            if [[ "$arg" != -* ]] && [[ "$arg" != +* ]]; then
+                # If path is already absolute, use as-is
+                if [[ "$arg" = /* ]]; then
+                    args+=("$arg")
+                else
+                    # Convert relative path to absolute, works for both existing and new files
+                    args+=("$PWD/$arg")
+                fi
             else
+                # Keep flags and commands as-is
                 args+=("$arg")
             fi
         done
