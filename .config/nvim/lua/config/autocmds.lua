@@ -58,3 +58,6 @@ vim.keymap.set("n", "<leader>O", function()
   end
   vim.cmd("Obsidian")
 end, { desc = "Open Obsidian command" })
+
+-- Show diagnostics in a float
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostics in float" })

@@ -71,7 +71,7 @@ export THESIS="$YY/CBMS/THESIS"
 export PCOV="$SV/20240409_GDpCoV519/_writeup"
 
 # personal scripts
-alias bgt="Rscript '$YY/Budget/viz_budget.R'"
+alias bgt="/Users/stanleyyo/Python/budget/run_budget.sh"
 alias obs="python3 '$YY/obsidian.py'"
 alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 
