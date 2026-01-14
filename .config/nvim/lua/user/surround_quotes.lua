@@ -44,8 +44,8 @@ end
 
 -- Function for visual mode
 function M.visual()
-  -- Get the visual mode type
-  local mode = vim.fn.visualmode()
+  -- Get the visual mode type BEFORE exiting visual mode
+  local mode = vim.fn.mode()
 
   -- Get the visual selection positions BEFORE exiting visual mode
   local start_pos = vim.fn.getpos("v") -- Start of visual selection
@@ -64,11 +64,15 @@ function M.visual()
     start_col, end_col = end_col, start_col
   end
 
-  -- For linewise visual mode, extend to end of line
+  -- For linewise visual mode, extend to cover the entire lines
   if mode == "V" then
     start_col = 0
-    local last_line = vim.api.nvim_buf_get_lines(0, end_row - 1, end_row, false)[1]
-    end_col = #last_line - 1
+    local last_line_tbl = vim.api.nvim_buf_get_lines(0, end_row - 1, end_row, false)
+    if #last_line_tbl > 0 then
+      end_col = #last_line_tbl[1] - 1
+    else
+      end_col = 0
+    end
   end
 
   surround_with_quotes({ start_row, start_col }, { end_row, end_col })
