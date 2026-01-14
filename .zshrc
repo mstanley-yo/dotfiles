@@ -175,3 +175,5 @@ eval "$(starship init zsh)"
 # Configure path
 export PATH="$PATH:/Users/stanleyyo/Scripts"
 export PATH="$PATH:/Users/stanleyyo/.local/bin" # add pipx to PATH
+export PYTHONPATH=/Users/stanleyyo/Python/mylib/
+
