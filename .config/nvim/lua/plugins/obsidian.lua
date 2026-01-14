@@ -29,5 +29,8 @@ return {
       date_format = "%Y-%m-%d",
       template = nil,
     },
+    footer = {
+      enabled = false,
+    },
   },
 }
