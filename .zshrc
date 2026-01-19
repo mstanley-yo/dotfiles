@@ -78,6 +78,7 @@ alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 # alias CLI tools
 alias pip="pip3"
 alias py="python3"
+alias python="python3"
 alias rr="Rscript"
 
 # configure nvim
@@ -127,38 +128,12 @@ cd() {
   builtin cd -P "$@"
 }
 
-# Override touch to create real Word / Excel files when needed. Needs pip install python-docx openpyxl
-touch() {
-  local created_any=false
-  for f in "$@"; do
-    case "$f" in
-      *.docx)
-        if [[ ! -e "$f" ]]; then
-          # Create minimal valid DOCX
-          python3 - <<EOF
-from docx import Document
-Document().save("$f")
-EOF
-          created_any=true
-        fi
-        ;;
-      *.xlsx|*.xls)
-        if [[ ! -e "$f" ]]; then
-          # Create minimal valid Excel file
-          python3 - <<EOF
-from openpyxl import Workbook
-Workbook().save("$f")
-EOF
-          created_any=true
-        fi
-        ;;
-      *)
-        command touch "$f"
-        ;;
-    esac
+# Source all custom functions if directory exists
+if [[ -d ~/.zsh_functions ]]; then
+  for function_file in ~/.zsh_functions/*.zsh; do
+    [[ -f "$function_file" ]] && source "$function_file"
   done
-  return 0
-}
+fi
 
 # Load private secrets if present
 if [[ -f ~/.zshrc.private ]]; then
