@@ -40,29 +40,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':fzf-tab:*' fzf-flags --ansi
 zstyle ':fzf-tab:*' fzf-preview ""
 
-# Use pf to preview files and copy the absolute path to them upon selection
-typeset -ga FZF_PREVIEW_OPTS=(
-  --ansi
-  --preview '
-    if [ -d {} ]; then
-      ls --color {}
-    elif file --mime-type -b {} | grep -q "^image/"; then
-      chafa --size=80x40 {}
-    elif file -b {} | grep -q text; then
-      bat --style=numbers --color=always --line-range=:300 {}
-    else
-      file {}
-    fi
-  '
-)
-
-pf() {
-  local file
-  file=$(ls --color | fzf $FZF_PREVIEW_OPTS) || return
-  echo "'$PWD/$file'" | pbcopy
-  echo "Copied: $PWD/$file"
-}
-
 # alias important directories
 export GD="$HOME/Library/CloudStorage/GoogleDrive-maximilianstanleyyo1@gmail.com/My Drive"
 export SV="$GD/Post-Graduate/SystemsVirology"
@@ -71,8 +48,8 @@ export THESIS="$YY/CBMS/THESIS"
 export PCOV="$SV/20240409_GDpCoV519/_writeup"
 
 # personal scripts
-alias bgt="/Users/stanleyyo/Python/budget/run_budget.sh"
-alias obs="python3 '$YY/obsidian.py'"
+alias bgt="/$HOME/Python/budget/run_budget.sh"
+alias obs="python3 '/$HOME/Scripts/obsidian.py'"
 alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
 
 # alias CLI tools
@@ -81,9 +58,8 @@ alias py="python3"
 alias python="python3"
 alias rr="Rscript"
 
-# configure nvim
+# set nvim as default editor
 export EDITOR=nvim
-
 
 # use git to track dotfiles (including .zshrc)
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -92,11 +68,6 @@ alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias pb="pbcopy"
 alias ls='ls -G -F'
 alias c="clear"
-
-# Always cd using physical paths (resolve symlinks)
-cd() { 
-  builtin cd -P "$@"
-}
 
 # Source all custom functions if directory exists
 if [[ -d ~/.zsh_functions ]]; then
@@ -118,7 +89,6 @@ fi
 eval "$(starship init zsh)"
 
 # Configure path
-export PATH="$PATH:/Users/stanleyyo/Scripts"
-export PATH="$PATH:/Users/stanleyyo/.local/bin" # add pipx to PATH
-export PYTHONPATH=/Users/stanleyyo/Python/mylib/
-
+export PATH="$PATH:/$HOME/Scripts"
+export PATH="$PATH:/$HOME/.local/bin" # add pipx to PATH
+export PYTHONPATH=/$HOME/Python/mylib/
