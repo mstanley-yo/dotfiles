@@ -82,38 +82,8 @@ alias python="python3"
 alias rr="Rscript"
 
 # configure nvim
-nvim() {
-    local socket="/tmp/nvim-$(tmux display-message -p "#{session_name}" 2>/dev/null || echo "default")"
-    rm -f "$socket" 2>/dev/null
-    command nvim --listen "$socket" "$@"
-}
-v() {
-    local socket="/tmp/nvim-$(tmux display-message -p "#{session_name}")"
-    if [ -S "$socket" ]; then
-        # Convert all arguments to absolute paths
-        local args=()
-        for arg in "$@"; do
-            # Check if argument looks like a file path (not a vim command like +10)
-            if [[ "$arg" != -* ]] && [[ "$arg" != +* ]]; then
-                # If path is already absolute, use as-is
-                if [[ "$arg" = /* ]]; then
-                    args+=("$arg")
-                else
-                    # Convert relative path to absolute, works for both existing and new files
-                    args+=("$PWD/$arg")
-                fi
-            else
-                # Keep flags and commands as-is
-                args+=("$arg")
-            fi
-        done
-        command nvim --server "$socket" --remote "${args[@]}"
-    else
-        echo "Error: No nvim server running in this tmux session. Start nvim first."
-        return 1
-    fi
-}
 export EDITOR=nvim
+
 
 # use git to track dotfiles (including .zshrc)
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

@@ -51,6 +51,27 @@ vim.keymap.set("x", 'g"', function()
 end, { noremap = true, desc = "Surround selection with quotes" })
 
 -- Bind Ctlr + K to emoji picker
+-- TO DO: Fix emojis getting inserted one character before the end of the line if cursor is at the end of the line.
 vim.keymap.set("i", "<C-k>", function()
+  -- Save cursor position (row, col)
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local row, col = pos[1], pos[2]
+
+  -- Exit insert mode and move to the position where emoji should be inserted
+  vim.cmd("stopinsert")
+  -- Set cursor one position to the right of where we were in insert mode
+  vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+  local group = vim.api.nvim_create_augroup("EmojiPickerInsert", { clear = true })
+
+  vim.api.nvim_create_autocmd("WinClosed", {
+    group = group,
+    once = true,
+    callback = function()
+      vim.schedule(function()
+        vim.cmd("startinsert")
+      end)
+      vim.api.nvim_del_augroup_by_id(group)
+    end,
+  })
   vim.cmd("InsertEmoji")
 end, { desc = "Emoji picker" })
