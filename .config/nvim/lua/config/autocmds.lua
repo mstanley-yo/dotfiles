@@ -19,9 +19,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "r",
   callback = function()
-    vim.keymap.set("n", "<leader>r", require("user.run_r_in_tmux").run_r_in_tmux, {
-      desc = "Run R script in tmux pane",
+    vim.keymap.set("n", "<leader>r", "<LocalLeader>rf", {
+      desc = "Start R in tmux pane",
       buffer = true,
+      remap = true, -- Important: allows it to trigger the <LocalLeader>rf mapping
     })
   end,
 })
