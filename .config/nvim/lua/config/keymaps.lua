@@ -19,18 +19,11 @@ vim.keymap.set("n", "gO", "O<Esc>j", { noremap = true })
 -- Bind BS to destructive d (while supporting motions)
 vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })
 
--- Run Python file in next tmux pane.
-vim.keymap.set(
-  "n",
-  "<leader>r",
-  require("user.run_python_in_tmux").run_python_in_tmux,
-  { desc = "Run Python in tmux pane" }
-)
-
 -- Bindings for obsidian
 vim.keymap.set("n", "<leader>o", function()
   vim.cmd("edit " .. os.date(os.getenv("YY") .. "/Journal/%Y-%m-%d.md"))
 end, { desc = "Open daily note" })
+
 vim.keymap.set("n", "<leader>O", function()
   -- ensure we're in a markdown buffer
   if vim.bo.filetype ~= "markdown" then
@@ -39,9 +32,6 @@ vim.keymap.set("n", "<leader>O", function()
   end
   vim.cmd("Obsidian")
 end, { desc = "Open Obsidian command" })
-
--- Show Python diagnostics in a float
-vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostics in float" })
 
 -- Make g" an operator to surround with quotes
 local surround = require("user.surround_quotes")
@@ -60,7 +50,7 @@ vim.keymap.set("i", "<C-k>", function()
   -- Exit insert mode and move to the position where emoji should be inserted
   vim.cmd("stopinsert")
   -- Set cursor one position to the right of where we were in insert mode
-  vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+  vim.api.nvim_win_set_cursor(0, { row, col })
   local group = vim.api.nvim_create_augroup("EmojiPickerInsert", { clear = true })
 
   vim.api.nvim_create_autocmd("WinClosed", {
