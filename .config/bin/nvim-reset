@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Resetting Neovim state..."
+
+rm -rf ~/.local/share/nvim/lazy
+rm -rf ~/.local/share/nvim/site
+rm -rf ~/.cache/nvim
+rm -rf ~/.local/share/nvim/tree-sitter
+
+echo "Neovim state cleared."
+echo "Next launch will reinstall plugins."
