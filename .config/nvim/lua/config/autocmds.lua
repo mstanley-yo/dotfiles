@@ -19,10 +19,22 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "r",
   callback = function()
-    vim.keymap.set("n", "<leader>r", "<LocalLeader>rf", {
+    vim.keymap.set("n", "<leader>R", "<LocalLeader>rf", {
       desc = "Start R in tmux pane",
       buffer = true,
-      remap = true, -- Important: allows it to trigger the <LocalLeader>rf mapping
+      remap = true,
+    })
+    vim.keymap.set("n", "<leader>r", "<LocalLeader>d", {
+      desc = "Send line to R",
+      buffer = true,
+      remap = true,
+    })
+    -- Use C-p for pipe
+    vim.keymap.set("i", "<C-p>", " |><CR>", {
+      desc = "Insert pipe operator",
+      buffer = true,
+      noremap = true,
+      silent = true,
     })
   end,
 })

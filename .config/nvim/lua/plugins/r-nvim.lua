@@ -8,6 +8,12 @@ return {
     local opts = {
       R_args = { "--quiet", "--no-save" },
       external_term = "tmux split-window -h -p 40",
+
+      -- Disable insert-mode pipe helper (<LocalLeader>,)
+      disable_cmds = {
+        "RInsertPipe",
+      },
+
       hook = {
         after_R_start = function()
           -- Switch back to the previous pane after R starts
