@@ -51,6 +51,7 @@ export PCOV="$SV/20240409_GDpCoV519/_writeup"
 alias pip="pip3"
 alias py="python3"
 alias python="python3"
+alias R="R --quiet --no-save"
 alias rr="Rscript"
 
 # set nvim as default editor

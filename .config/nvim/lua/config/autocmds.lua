@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("FileType", {
       remap = true,
     })
     -- Use C-p for pipe
-    vim.keymap.set("i", "<C-p>", " |><CR>", {
+    vim.keymap.set("i", "<C-p>", " |> ", {
       desc = "Insert pipe operator",
       buffer = true,
       noremap = true,

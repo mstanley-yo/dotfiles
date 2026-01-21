@@ -3,13 +3,27 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Apply to all LSP servers including pyright
+        -- Global settings for all LSP servers
         ["*"] = {
           keys = {
-            -- Disable <C-k> in insert mode for signature help
             { "<C-k>", false, mode = "i" },
-            -- Add <C-k> in normal mode for signature help
             { "<C-k>", vim.lsp.buf.signature_help, desc = "Signature Help", mode = "n" },
+          },
+        },
+
+        -- R language server
+        r_language_server = {
+          cmd = { "R", "--slave", "-e", "languageserver::run()" },
+          filetypes = { "r", "rmd" },
+          root_dir = function(fname)
+            return require("lspconfig.util").root_pattern(".git", ".Rproj", "DESCRIPTION")(fname) or vim.fn.getcwd()
+          end,
+          settings = {
+            r = {
+              lsp = {
+                rich_documentation = true,
+              },
+            },
           },
         },
       },
