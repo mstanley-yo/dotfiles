@@ -47,11 +47,6 @@ export YY="$GD/YY"
 export THESIS="$YY/CBMS/THESIS"
 export PCOV="$SV/20240409_GDpCoV519/_writeup"
 
-# personal scripts
-alias bgt="/$HOME/Python/budget/run_budget.sh"
-alias obs="python3 '/$HOME/Scripts/obsidian.py'"
-alias leetcode="python3 $HOME/Python/leetcode/get_leetcode.py"
-
 # alias CLI tools
 alias pip="pip3"
 alias py="python3"
@@ -89,6 +84,6 @@ fi
 eval "$(starship init zsh)"
 
 # Configure path
-export PATH="$PATH:/$HOME/Scripts"
-export PATH="$PATH:/$HOME/.local/bin" # add pipx to PATH
+export PATH="$PATH:/$HOME/.config/bin" # personal scripts
+export PATH="$PATH:/$HOME/.local/bin"
 export PYTHONPATH=/$HOME/Python/mylib/

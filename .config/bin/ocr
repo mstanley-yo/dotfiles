@@ -1,0 +1,13 @@
+#!/Users/stanleyyo/.config/bin/.venv/bin/python
+
+from PIL import ImageGrab
+import pytesseract
+
+# Capture image from clipboard
+img = ImageGrab.grabclipboard()
+
+if img:
+    text = pytesseract.image_to_string(img)
+    print(text)
+else:
+    raise Exception("No image in clipboard.")
