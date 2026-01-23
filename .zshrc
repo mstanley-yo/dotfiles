@@ -20,7 +20,7 @@ zinit light jeffreytse/zsh-vi-mode
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
-HISTDUP=eraseœ
+HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
@@ -50,6 +50,7 @@ export PCOV="$SV/20240409_GDpCoV519/_writeup"
 # alias CLI tools
 alias pip="pip3"
 alias py="python3"
+alias nvnv="python3 -m venv .venv"
 alias python="python3"
 alias R="R --quiet --no-save"
 alias rr="Rscript"
