@@ -29,10 +29,6 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Change ls colors - reference https://geoff.greer.fm/lscolors/
-export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=31"
-export LSCOLORS="gxfxcxdxbxegedabagacad"
-
 # Replace zsh's default completion selection menu with fzf
 zinit light Aloxaf/fzf-tab
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -63,7 +59,6 @@ alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # alias common bash commands and improvements
 alias pb="pbcopy"
-alias ls='ls -G -F'
 alias c="clear"
 
 # Source all custom functions if directory exists
