@@ -84,3 +84,15 @@ eval "$(starship init zsh)"
 export PATH="$PATH:/$HOME/.config/bin" # personal scripts
 export PATH="$PATH:/$HOME/.local/bin"
 export PYTHONPATH=/$HOME/Python/mylib/
+
+# WSL linux settings
+case "$(uname -s)" in
+  Linux*) # Linux / WSL
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    export DESKTOP="/mnt/c/Users/maxim/Desktop"
+    ;;
+  Darwin*) # macOS
+    :  # placeholder (no-op for now)
+    ;;
+esac
+
