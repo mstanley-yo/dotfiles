@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Autocmd for R
+-- Autocmds for R
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "r",
   callback = function()
@@ -35,6 +35,26 @@ vim.api.nvim_create_autocmd("FileType", {
       buffer = true,
       noremap = true,
       silent = true,
+    })
+  end,
+})
+
+-- Autocmd for Go
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function(args)
+    -- Format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = args.buf,
+      callback = function()
+        vim.lsp.buf.format()
+      end,
+    })
+
+    -- Keymap to run Go in tmux
+    vim.keymap.set("n", "<leader>r", require("user.run_go_in_tmux").run_go_in_tmux, {
+      desc = "Run Go in tmux pane",
+      buffer = args.buf,
     })
   end,
 })
