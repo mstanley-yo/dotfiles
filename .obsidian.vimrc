@@ -43,6 +43,7 @@ nnoremap g`a< ca<`<C-r>"`<Esc>
 nnoremap g`it cit`<C-r>"`<Esc>
 nnoremap g`at cat`<C-r>"`<Esc>
 nnoremap g`` cc```<CR><C-r>"```<Esc>kk
+nnoremap g`l i`<Esc>la`<Esc>h
 
 vnoremap g[ <Esc>`>a]]<Esc>`<i[[<Esc>
 nnoremap g[iw ciw[[<C-r>"]]<Esc>
@@ -95,6 +96,7 @@ nnoremap g"i< ci<"<C-r>""<Esc>
 nnoremap g"a< ca<"<C-r>""<Esc>
 nnoremap g"it cit"<C-r>""<Esc>
 nnoremap g"at cat"<C-r>""<Esc>
+nnoremap g"l i"<Esc>la"<Esc>h
 
 vnoremap g' <Esc>`>`<Esc>`<i'<Esc>
 nnoremap g'iw ciw'<C-r>"'<Esc>
@@ -121,6 +123,7 @@ nnoremap g'i< ci<'<C-r>"'<Esc>
 nnoremap g'a< ca<'<C-r>"'<Esc>
 nnoremap g'it cit'<C-r>"'<Esc>
 nnoremap g'at cat'<C-r>"'<Esc>
+nnoremap g'l i'<Esc>la'<Esc>h
 
 vnoremap g( <Esc>`>a)<Esc>`<i(<Esc>
 nnoremap g(iw ciw(<C-r>")<Esc>
@@ -147,6 +150,7 @@ nnoremap g(i< ci<(<C-r>")<Esc>
 nnoremap g(a< ca<(<C-r>")<Esc>
 nnoremap g(it cit(<C-r>")<Esc>
 nnoremap g(at cat(<C-r>")<Esc>
+nnoremap g(l i(<Esc>la)<Esc>h
 
 vnoremap g{ <Esc>`>a}<Esc>`<i{<Esc>
 nnoremap g{iw ciw{<C-r>"}<Esc>
@@ -173,6 +177,7 @@ nnoremap g{i< ci<{<C-r>"}<Esc>
 nnoremap g{a< ca<{<C-r>"}<Esc>
 nnoremap g{it cit{<C-r>"}<Esc>
 nnoremap g{at cat{<C-r>"}<Esc>
+nnoremap g{l i{<Esc>la}<Esc>h
 
 vnoremap g< <Esc>`>a><Esc>`<i<<Esc>
 nnoremap g<iw ciw<<C-r>"><Esc>
@@ -199,4 +204,4 @@ nnoremap g<i< ci<<<C-r>"><Esc>
 nnoremap g<a< ca<<<C-r>"><Esc>
 nnoremap g<it cit<<C-r>"><Esc>
 nnoremap g<at cat<<C-r>"><Esc>
-
+nnoremap g<l i<<Esc>la><Esc>h
