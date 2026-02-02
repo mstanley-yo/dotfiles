@@ -14,4 +14,17 @@ return {
       end,
     })
   end,
+
+  -- Ensure languages are installed
+  opts = {
+    ensure_installed = {
+      "go",
+      "gomod",
+      "gosum",
+      "bash",
+      "yaml",
+      "json",
+      "dockerfile",
+    },
+  },
 }

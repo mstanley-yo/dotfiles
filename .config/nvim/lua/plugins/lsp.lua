@@ -37,6 +37,7 @@ return {
                 unusedparams = true,
                 shadow = true,
               },
+              completeUnimported = true, -- automatically import packages called but not imported
             },
           },
         },
