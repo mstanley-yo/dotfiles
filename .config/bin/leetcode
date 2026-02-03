@@ -1,123 +1,147 @@
-#!/Users/stanleyyo/Python/leetcode/.venv/bin/python3
+#!/Users/stanleyyo/.config/bin/.venv/bin/python3
 
 import argparse
 import requests
 import html2text
 from pathlib import Path
 import re
-from subprocess import run
 
-WD = Path("/Users/stanleyyo/Python/leetcode")
-WD_MD = Path(
+WD_PYTHON = Path("/Users/stanleyyo/Python/leetcode")
+WD_MARKDOWN = Path(
     "/Users/stanleyyo/Library/CloudStorage/"
     "GoogleDrive-maximilianstanleyyo1@gmail.com/My Drive/YY/SE/Leetcode"
 )
-HELP_TEXT = """
-usage: get_leetcode.py [-h] [-e] [number]
-
-Fetch LeetCode problem
-
-positional arguments:
-  number      LeetCode problem number
-
-options:
-  -h, --help  show this help message and exit
-  -e, --edit  Edit get_leetcode.py
-"""
+WD_GO = Path("/Users/stanleyyo/Go/leetcode")
 PROBLEMS_LIST_URL = "https://leetcode.com/api/problems/all/"
-GRAPHQL_URL = "https://leetcode.com/graphql/"
-HEADERS = {"Content-Type": "application/json"}
-FOOTER = """pass
 
-sol = Solution()
-res = sol.{method}()
-print(res)
-"""
+class Problem:
+    def __init__(self, problem_number) -> None:
+        self.problem_number = problem_number
 
-def get_slug(problem_number: int) -> str | None:
-    """Fetch slug based on problem number"""
-    data = requests.get(PROBLEMS_LIST_URL).json()
-    for q in data["stat_status_pairs"]:
-        if q["stat"]["frontend_question_id"] == problem_number:
-            return q["stat"]["question__title_slug"]
+    def get_slug(self) -> None:
+        """Fetch slug based on problem number"""
+        data = requests.get(PROBLEMS_LIST_URL).json()
+        for q in data["stat_status_pairs"]:
+            if q["stat"]["frontend_question_id"] == self.problem_number:
+                self.slug = q["stat"]["question__title_slug"]
+                self.url = f"https://leetcode.com/problems/{self.slug}/"
+                return
+        raise Exception(f"❌ Could not find slug for problem number {self.problem_number}")
 
-    return None
-
-def fetch_problem_data(slug: str):
-    """Fetch problem details using GraphQL"""
-    query = """
-    query getQuestion($titleSlug: String!) {
-      question(titleSlug: $titleSlug) {
-        title
-        content
-        codeSnippets {
-          lang
-          code
+    def fetch_problem_data(self) -> None:
+        """Fetch problem details using GraphQL"""
+        query = """
+        query getQuestion($titleSlug: String!) {
+        question(titleSlug: $titleSlug) {
+            title
+            content
+            codeSnippets {
+            lang
+            code
+            }
         }
-      }
-    }
-    """
-    payload = {"query": query, "variables": {"titleSlug": slug}}
-    r = requests.post(GRAPHQL_URL, json=payload, headers=HEADERS)
-    q = r.json()["data"]["question"]
+        }
+        """
+        payload = {"query": query, "variables": {"titleSlug": self.slug}}
+        r = requests.post(
+            "https://leetcode.com/graphql/",
+            json=payload,
+            headers={"Content-Type": "application/json"}
+        )
+        q = r.json()["data"]["question"]
 
-    return q["title"], q["content"], q["codeSnippets"]
+        self.problem_title = q["title"]
+        self.problem_content_html = q["content"]
+        self.code_snippets = q["codeSnippets"]
 
-def html_to_body(html: str) -> str:
-    """Convert HTML to body"""
-    h = html2text.HTML2Text()
-    h.ignore_links = False
-    h.ignore_images = False
-    body = h.handle(html)
+    def html_to_body(self) -> None:
+        """Convert content HTML to clean body"""
+        h = html2text.HTML2Text()
+        h.ignore_links = False
+        h.ignore_images = False
+        body = h.handle(self.problem_content_html)
 
-    # clean body
-    body = re.sub("(\n){2,3}", "\n", body) # normalise \n
-    body = re.sub("    \n", "", body)
-    body = re.sub("  ", "", body) # 2-space to no indent
-    return body
+        # clean body
+        body = re.sub("(\n){2,3}", "\n", body) # normalise \n
+        body = re.sub("    \n", "", body)
+        body = re.sub("  ", "", body) # 2-space to no indent
+        self.problem_body = body
 
-def get_python_template(snippets):
-    """Extract Python snippet code"""
-    
-    for snippet in snippets:
-        if snippet["lang"] == "Python3" or snippet["lang"] == "Pandas":
-            code = snippet["code"]
+    def get_python_template(self):
+        """Extract Python snippet code"""
+        footer = """pass
 
-            # get method name and format
-            method_pattern = re.compile(r"def\s+([a-zA-Z_]\w*)\s*\(")
-            match = method_pattern.search(code)
-            method_name = match.group(1) if match else "method"
-            code += FOOTER.format(method=method_name)
-            return code
+        sol = Solution()
+        res = sol.{method}()
+        print(res)
+        """
+        for snippet in self.code_snippets:
+            if snippet["lang"] == "Python3" or snippet["lang"] == "Pandas":
+                code = snippet["code"]
+
+                # get method name and format
+                method_pattern = re.compile(r"def\s+([a-zA-Z_]\w*)\s*\(.*?\)")
+                match = method_pattern.search(code)
+                method_name = match.group(1) if match else "method"
+                code += footer.format(method=method_name)
+                self.python_template = code
+                return
+        print(f"❌ Problem {self.problem_number} does not support Python")
+        self.python_template = "class Solution:\n    pass\n"
+
+    def get_go_template(self):
+        """Extract Go snippet code"""
+        header = "package main\n\nimport \"fmt\"\n\n"
+        footer = "\n\nfunc main() {\n\n}\n"
+        for snippet in self.code_snippets:
+            if snippet["lang"] == "Go":
+                code = header + snippet["code"] + footer
+                self.go_template = code
+                return
+        print(f"❌ Problem {self.problem_number} does not support Go")
+
+    def save(self) -> None:
+        """Save body and code to .py file and markdown in obsidian"""
+        filename_python = WD_PYTHON / f"{self.problem_number}-{self.slug}.py"
+        filename_go = WD_GO / f"{self.problem_number}-{self.slug}.go"
+        filename_markdown = WD_MARKDOWN / f"Leetcode {self.problem_number} - {self.problem_title}.md"
+
+        # save to .py file
+        if not list(WD_PYTHON.glob(f"{self.problem_number}-*.py")):
+            with open(filename_python, "w") as f:
+                f.write("'''\n")
+                f.write(f"{self.problem_number}. {self.problem_title}\n")
+                f.write(f"URL: {self.url}\n\n")
+                f.write(self.problem_body)
+                f.write("'''\n\n")
+                f.write(self.python_template)
+                print(f"📄 Saved Python: {self.problem_number}-{self.slug}")
+
+        # save to .go file
+        # TO DO: Figure out a way to pick up the function name using regex
+        if not list(WD_GO.glob(f"{self.problem_number}-*.go")):
+            with open(filename_go, "w") as f:
+                f.write("/*\n")
+                f.write(f"{self.problem_number}. {self.problem_title}\n")
+                f.write(f"URL: {self.url}\n\n")
+                f.write(self.problem_body)
+                f.write("*/\n\n")
+                f.write(self.go_template)
+                print(f"📄 Saved Go: {self.problem_number}-{self.slug}")
+
+        # save to .md file
+        if not list(WD_MARKDOWN.glob(f"Leetcode {self.problem_number}*.md")):
+            with open(filename_markdown, "w") as f:
+                f.write(f"URL: {self.url}\n\n")
+                f.write("```python\n")
+                f.write("'''\n")
+                f.write(self.problem_body)
+                f.write("'''\n\n")
+                f.write(self.python_template)
+                f.write("```\n")
+                print(f"📄 Saved Markdown: {self.problem_number}-{self.slug}")
         
-    return "class Solution:\n    pass\n"
-
-def save_body(num: int, slug: str, title: str, body: str, code: str) -> None:
-    """Save body and code to .py file and markdown in obsidian"""
-    filename = WD / f"{num}-{slug}.py"
-    url = f"https://leetcode.com/problems/{slug}/"
-
-    # save to .py file
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write("'''\n")
-        f.write(f"{num}. {title}\n")
-        f.write(f"URL: {url}\n\n")
-        f.write(body)
-        f.write("'''\n\n")
-        f.write(code)
-
-    # save to .md file
-    with open(WD_MD / f"Leetcode {num} - {title}.md", "w") as f:
-        f.write(f"URL: {url}\n\n")
-        f.write("```python\n")
-        f.write("'''\n")
-        f.write(body)
-        f.write("'''\n\n")
-        f.write(code)
-        f.write("```\n")
-    
-    print(f"📄 Templates saved: {filename.stem}")
-    print(f"🔗 URL: {url}")
+        print(f"🔗 URL: {self.url}")
 
 def main():
     parser = argparse.ArgumentParser(description="Fetch LeetCode problem")
@@ -126,31 +150,33 @@ def main():
 
     number = args.number
     if not number:
-        print(f"❌ Please input a problem number\n{HELP_TEXT}")
+        print(f"❌ Please input a problem number.")
         return
     if number < 1:
         print("❌ Not a valid problem number.")
         return
     
     # Check if already exists
-    if list(WD.glob(f"{number}-*.py")):
+    if list(WD_PYTHON.glob(f"{number}-*.py")) and list(WD_GO.glob(f"{number}-*.go")):
         print(f"📄 A file for problem {number} already exists.")
         return
 
     # Get slug
     print(f"🔍 Fetching problem {number}...")
-    slug = get_slug(number)
-    if slug is None:
+    problem = Problem(problem_number=number)
+    problem.get_slug()
+    if not problem.slug:
         print("❌ Problem not found.")
         return
 
     # Fetch problem details
-    title, html, snippet = fetch_problem_data(slug)
-    body = html_to_body(html)
-    python_code = get_python_template(snippet)
+    problem.fetch_problem_data()
+    problem.html_to_body()
+    problem.get_python_template()
+    problem.get_go_template()
 
-    # Save .py + .md file and open
-    save_body(number, slug, title, body, python_code)
+    # Save .py + .go + .md file
+    problem.save()
 
 if __name__ == "__main__":
     main()
