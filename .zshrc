@@ -80,10 +80,12 @@ if ! command -v starship >/dev/null 2>&1; then
 fi
 eval "$(starship init zsh)"
 
-# Configure path
+# Configure paths
 export PATH="$PATH:/$HOME/.config/bin" # personal scripts
 export PATH="$PATH:/$HOME/.local/bin"
-export PYTHONPATH=/$HOME/Python/mylib/
+export PYTHONPATH=$HOME/Python/mylib
+export GOPATH=$HOME/gopath
+export PATH=$PATH:$GOPATH/bin
 
 # WSL linux settings
 case "$(uname -s)" in

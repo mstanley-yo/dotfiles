@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
     vim.keymap.set("n", "<leader>R", go.run_go_package, {
       buffer = true,
-      desc = "Go: Run package in tmux",
+      desc = "Go: Build and run package in tmux",
     })
   end,
 })
