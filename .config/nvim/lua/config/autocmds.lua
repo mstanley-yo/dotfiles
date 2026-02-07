@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("FileType", {
     })
 
     -- Keymaps to run Go in tmux
-    local go = require("user.run_go_in_tmux")
+    local go = require("user.go_tmux")
     vim.keymap.set("n", "<leader>r", go.run_go_file, {
       desc = "Go: Run current file in tmux",
       buffer = args.buf,

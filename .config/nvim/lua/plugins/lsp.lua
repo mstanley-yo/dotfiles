@@ -11,6 +11,17 @@ return {
           },
         },
 
+        -- Lua language server
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+            },
+          },
+        },
+
         -- R language server
         r_language_server = {
           cmd = { "R", "--slave", "-e", "languageserver::run()" },

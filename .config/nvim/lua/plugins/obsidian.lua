@@ -15,7 +15,9 @@ return {
         path = "/Users/stanleyyo/Library/CloudStorage/GoogleDrive-maximilianstanleyyo1@gmail.com/My Drive/YY",
       },
     },
-    disable_frontmatter = true,
+    frontmatter = {
+      enabled = false,
+    },
     completion = {
       -- For blink.cmp, use this instead of nvim_cmp
       nvim_cmp = false,
