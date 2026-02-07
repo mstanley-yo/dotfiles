@@ -3,19 +3,7 @@ return {
   branch = "main",
   lazy = false,
   build = ":TSUpdate",
-  config = function()
-    local langs = { "markdown", "markdown_inline", "r", "rnoweb", "yaml", "latex", "csv" }
-    require("nvim-treesitter").install(langs)
 
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = langs,
-      callback = function()
-        vim.treesitter.start()
-      end,
-    })
-  end,
-
-  -- Ensure languages are installed
   opts = {
     ensure_installed = {
       "go",
@@ -25,6 +13,15 @@ return {
       "yaml",
       "json",
       "dockerfile",
+      "markdown",
+      "markdown_inline",
+      "r",
+      "latex",
+      "csv",
+    },
+
+    highlight = {
+      enable = true,
     },
   },
 }

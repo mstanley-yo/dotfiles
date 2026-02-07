@@ -22,22 +22,6 @@ return {
           },
         },
 
-        -- R language server
-        r_language_server = {
-          cmd = { "R", "--slave", "-e", "languageserver::run()" },
-          filetypes = { "r", "rmd" },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(".git", ".Rproj", "DESCRIPTION")(fname) or vim.fn.getcwd()
-          end,
-          settings = {
-            r = {
-              lsp = {
-                rich_documentation = true,
-              },
-            },
-          },
-        },
-
         -- Go language server
         gopls = {
           settings = {
