@@ -1,6 +1,6 @@
 local M = {}
 
-function M.run_python_in_tmux()
+function M.run_python_file()
   -- Check if running in tmux
   if not vim.env.TMUX then
     vim.notify("ERROR: This command requires tmux", vim.log.levels.ERROR)

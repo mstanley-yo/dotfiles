@@ -22,16 +22,7 @@ vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })
 -- Bindings for obsidian
 vim.keymap.set("n", "<leader>o", function()
   vim.cmd("edit " .. os.date(os.getenv("YY") .. "/Journal/%Y-%m-%d.md"))
-end, { desc = "Open daily note" })
-
-vim.keymap.set("n", "<leader>O", function()
-  -- ensure we're in a markdown buffer
-  if vim.bo.filetype ~= "markdown" then
-    vim.cmd("enew")
-    vim.bo.filetype = "markdown"
-  end
-  vim.cmd("Obsidian")
-end, { desc = "Open Obsidian command" })
+end, { desc = "Open Daily Note" })
 
 -- Make g" an operator to surround with quotes
 local surround = require("user.surround_quotes")

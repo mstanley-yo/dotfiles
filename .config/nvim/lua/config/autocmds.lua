@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
     vim.opt_local.colorcolumn = "80,100"
-    vim.keymap.set("n", "<leader>r", require("user.run_python_in_tmux").run_python_in_tmux, {
+    vim.keymap.set("n", "<leader>r", require("user.python_tmux").run_python_file, {
       desc = "Run Python in tmux pane",
       buffer = true,
     })
@@ -61,6 +61,19 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<leader>R", go.run_go_package, {
       buffer = true,
       desc = "Go: Build and run package in tmux",
+    })
+  end,
+})
+
+-- Autocmd for markdown
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function(event)
+    vim.keymap.set("n", "<leader>O", function()
+      vim.cmd("Obsidian")
+    end, {
+      buffer = event.buf,
+      desc = "Open Obsidian command",
     })
   end,
 })
