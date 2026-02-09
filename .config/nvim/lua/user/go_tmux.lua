@@ -42,7 +42,12 @@ function M.run_go_file()
   local file_dir = vim.fn.expand("%:p:h")
   local filename = vim.fn.expand("%:t")
   prepare_tmux(file_dir)
-  local go_cmd = "cd " .. vim.fn.shellescape(file_dir) .. " && go run " .. vim.fn.shellescape(filename)
+  local go_cmd
+  if filename:match("_test%.go$") then
+    go_cmd = "cd " .. vim.fn.shellescape(file_dir) .. " && go test -v"
+  else
+    go_cmd = "cd " .. vim.fn.shellescape(file_dir) .. " && go run " .. vim.fn.shellescape(filename)
+  end
   send_cmd(go_cmd)
 end
 
