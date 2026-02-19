@@ -19,7 +19,7 @@ vim.keymap.set("n", "gO", "O<Esc>j", { noremap = true })
 -- Bind BS to destructive d (while supporting motions)
 vim.keymap.set({ "n", "v" }, "<BS>", '"_d', { noremap = true, silent = true })
 
--- Bindings for obsidian
+-- Binding to open obsidian daily note
 vim.keymap.set("n", "<leader>o", function()
   vim.cmd("edit " .. os.date(os.getenv("YY") .. "/Journal/%Y-%m-%d.md"))
 end, { desc = "Open Daily Note" })
@@ -34,3 +34,7 @@ end, { noremap = true, desc = "Surround selection with quotes" })
 -- Bind Ctlr + K to emoji picker
 local emoji_picker = require("user.emoji_picker")
 vim.keymap.set("i", "<C-k>", emoji_picker.open_emoji_picker, { desc = "Emoji picker" })
+
+-- Keybindings for moving buffers using bufferline.nvim
+vim.keymap.set("n", "<leader>bh", "<cmd>BufferLineMovePrev<cr>")
+vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineMoveNext<cr>")
