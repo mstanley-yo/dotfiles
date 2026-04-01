@@ -1,3 +1,11 @@
+-- Substitute Windows-style carriage return at every write (WSL/Linux only)
+if vim.uv.os_uname().sysname ~= "Darwin" then
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    command = "%s/\\r//ge",
+  })
+end
+
 -- Autocmds for Python
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",

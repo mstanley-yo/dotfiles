@@ -17,7 +17,11 @@ typeset -ga FZF_PREVIEW_OPTS=(
 pf() {
   local file
   file=$(ls --color | fzf $FZF_PREVIEW_OPTS) || return
-  echo "'$PWD/$file'" | pbcopy
+  local pb
+  case "$(uname -s)" in
+    Linux*)  pb="clip.exe" ;;  # WSL
+    Darwin*) pb="pbcopy"   ;;  # macOS
+  esac
+  echo "'$PWD/$file'" | $pb
   echo "Copied: $PWD/$file"
 }
-

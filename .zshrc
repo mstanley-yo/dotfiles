@@ -37,11 +37,9 @@ zstyle ':fzf-tab:*' fzf-flags --ansi
 zstyle ':fzf-tab:*' fzf-preview ""
 
 # alias important directories
-export GD="$HOME/Library/CloudStorage/GoogleDrive-maximilianstanleyyo1@gmail.com/My Drive"
-export SV="$GD/Post-Graduate/SystemsVirology"
-export YY="$GD/YY"
-export THESIS="$YY/CBMS/THESIS"
-export PCOV="$SV/20240409_GDpCoV519/_writeup"
+export GD="/mnt/d/Drive/"
+export SV="/mnt/d/Drive/Post-Graduate/SystemsVirology/"
+export YY="/mnt/d/Drive/YY/"
 
 # alias CLI tools
 alias pip="pip3"
@@ -58,7 +56,6 @@ export EDITOR=nvim
 alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # alias common bash commands and improvements
-alias pb="pbcopy"
 alias c="clear"
 
 # Source all custom functions if directory exists
@@ -87,14 +84,14 @@ export PYTHONPATH=$HOME/Python/mylib
 export GOPATH=$HOME/gopath
 export PATH=$PATH:$GOPATH/bin
 
-# WSL linux settings
+# WSL/macOS settings
 case "$(uname -s)" in
   Linux*) # Linux / WSL
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     export DESKTOP="/mnt/c/Users/maxim/Desktop"
+    alias pb="clip.exe"
     ;;
   Darwin*) # macOS
-    :  # placeholder (no-op for now)
+    alias pb="pbcopy"
     ;;
 esac
-
