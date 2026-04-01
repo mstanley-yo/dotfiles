@@ -1,0 +1,190 @@
+/* Neovim-style headers for Obsidian */
+/* Keep header markers visible and style headers with color + bold */
+
+/* Reset all header sizes to normal text size - Reading Mode */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  font-size: inherit;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Reset all header sizes to normal text size - Editing Mode */
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6,
+.HyperMD-header-1,
+.HyperMD-header-2,
+.HyperMD-header-3,
+.HyperMD-header-4,
+.HyperMD-header-5,
+.HyperMD-header-6,
+.cm-line.HyperMD-header-1,
+.cm-line.HyperMD-header-2,
+.cm-line.HyperMD-header-3,
+.cm-line.HyperMD-header-4,
+.cm-line.HyperMD-header-5,
+.cm-line.HyperMD-header-6 {
+  font-size: var(--font-text-size) !important;
+  font-weight: bold;
+  line-height: var(--line-height-normal) !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Color each header level differently - Reading Mode */
+.markdown-preview-view h1,
+.markdown-preview-view h1::before {
+  color: #ff6b6b;
+}
+
+.markdown-preview-view h2,
+.markdown-preview-view h2::before {
+  color: #4ecdc4;
+}
+
+/* 🔮 H3 – Purple */
+.markdown-preview-view h3,
+.markdown-preview-view h3::before {
+  color: #bb9af7;
+}
+
+.markdown-preview-view h4,
+.markdown-preview-view h4::before {
+  color: #96ceb4;
+}
+
+.markdown-preview-view h5,
+.markdown-preview-view h5::before {
+  color: #ffeaa7;
+}
+
+.markdown-preview-view h6,
+.markdown-preview-view h6::before {
+  color: #dfe6e9;
+}
+
+/* Color each header level differently - Editing Mode */
+.cm-header-1,
+.HyperMD-header-1 { color: #ff6b6b; }
+
+.cm-header-2,
+.HyperMD-header-2 { color: #4ecdc4; }
+
+/* 🔮 H3 – Purple */
+.cm-header-3,
+.HyperMD-header-3 { color: #bb9af7; }
+
+.cm-header-4,
+.HyperMD-header-4 { color: #96ceb4; }
+
+.cm-header-5,
+.HyperMD-header-5 { color: #ffeaa7; }
+
+.cm-header-6,
+.HyperMD-header-6 { color: #dfe6e9; }
+
+/* Keep ### markers visible in editing mode */
+.cm-formatting.cm-formatting-header,
+span.cm-formatting-header,
+.markdown-source-view.mod-cm6 .cm-formatting-header,
+.cm-line .cm-formatting-header {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: var(--font-text-size) !important;
+  color: inherit !important;
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+}
+
+/* Prevent any hiding of formatting symbols */
+.markdown-source-view.mod-cm6.is-live-preview .cm-formatting-header {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Override any theme that might hide these */
+.cm-formatting-header.cm-formatting-header-1,
+.cm-formatting-header.cm-formatting-header-2,
+.cm-formatting-header.cm-formatting-header-3,
+.cm-formatting-header.cm-formatting-header-4,
+.cm-formatting-header.cm-formatting-header-5,
+.cm-formatting-header.cm-formatting-header-6 {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Background highlight - Reading Mode */
+.markdown-preview-view h1 { background-color: rgba(255, 107, 107, 0.1); }
+.markdown-preview-view h2 { background-color: rgba(78, 205, 196, 0.1); }
+
+/* 🔮 H3 – Purple background */
+.markdown-preview-view h3 { background-color: rgba(187, 154, 247, 0.12); }
+
+.markdown-preview-view h4 { background-color: rgba(150, 206, 180, 0.1); }
+.markdown-preview-view h5 { background-color: rgba(255, 234, 167, 0.1); }
+.markdown-preview-view h6 { background-color: rgba(223, 230, 233, 0.1); }
+
+/* Padding for the highlight effect - Reading Mode */
+.markdown-preview-view h1,
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Background highlight - Editing Mode */
+.cm-line.HyperMD-header-1,
+.cm-line.cm-header-1 { background-color: rgba(255, 107, 107, 0.1) !important; }
+
+.cm-line.HyperMD-header-2,
+.cm-line.cm-header-2 { background-color: rgba(78, 205, 196, 0.1) !important; }
+
+/* 🔮 H3 – Purple background */
+.cm-line.HyperMD-header-3,
+.cm-line.cm-header-3 { background-color: rgba(187, 154, 247, 0.12) !important; }
+
+.cm-line.HyperMD-header-4,
+.cm-line.cm-header-4 { background-color: rgba(150, 206, 180, 0.1) !important; }
+
+.cm-line.HyperMD-header-5,
+.cm-line.cm-header-5 { background-color: rgba(255, 234, 167, 0.1) !important; }
+
+.cm-line.HyperMD-header-6,
+.cm-line.cm-header-6 { background-color: rgba(223, 230, 233, 0.1) !important; }
+
+/* Padding for the highlight effect - Editing Mode */
+.cm-line.HyperMD-header-1,
+.cm-line.HyperMD-header-2,
+.cm-line.HyperMD-header-3,
+.cm-line.HyperMD-header-4,
+.cm-line.HyperMD-header-5,
+.cm-line.HyperMD-header-6,
+.cm-line.cm-header-1,
+.cm-line.cm-header-2,
+.cm-line.cm-header-3,
+.cm-line.cm-header-4,
+.cm-line.cm-header-5,
+.cm-line.cm-header-6 {
+  padding: 2px 4px !important;
+  border-radius: 3px;
+}

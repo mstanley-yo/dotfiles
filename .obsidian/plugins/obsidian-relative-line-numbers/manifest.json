@@ -1,0 +1,9 @@
+{
+  "id": "relative-line-numbers",
+  "name": "Relative Line Numbers",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Vim-style relative line numbers for edit mode",
+  "author": "Stanley Yo",
+  "isDesktopOnly": false
+}

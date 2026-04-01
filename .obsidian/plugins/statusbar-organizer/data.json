@@ -1,0 +1,41 @@
+{
+  "activePreset": "Default",
+  "activeFullscreenPreset": "Default",
+  "separateFullscreenPreset": false,
+  "presets": {
+    "Default": {
+      "plugin-backlink;1": {
+        "position": 0,
+        "visible": false
+      },
+      "plugin-editor-status;1": {
+        "position": 1,
+        "visible": false
+      },
+      "plugin-word-count;1": {
+        "position": 4,
+        "visible": true
+      },
+      "plugin-obsidian-vimrc-support;1": {
+        "position": 2,
+        "visible": true
+      },
+      "plugin-obsidian-vimrc-support-vimrc-support-vim-mode;1": {
+        "position": 3,
+        "visible": true
+      },
+      "plugin-properties;1": {
+        "position": 6,
+        "visible": true
+      },
+      "plugin-sync;1": {
+        "position": 7,
+        "visible": false
+      }
+    }
+  },
+  "presetsOrder": [
+    "Default"
+  ],
+  "version": "2.1.4"
+}

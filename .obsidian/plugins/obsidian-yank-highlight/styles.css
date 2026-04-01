@@ -1,0 +1,14 @@
+/* styles.css */
+.yank-highlight {
+    background-color: rgba(255, 127, 0, 0.8);
+    animation: yank-flash 500ms ease-out forwards;
+}
+
+@keyframes yank-flash {
+    0% {
+        background-color: rgba(255, 127, 0, 0.8);
+    }
+    100% {
+        background-color: rgba(255, 127, 0, 0);
+    }
+}
